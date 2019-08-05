@@ -6,7 +6,7 @@ Please see the [architectural discussion document](./architectural-discussion.md
 ## Engineering Workflow
 - [ ] New engineering workstations are deployed easiely and quickly.
 - [ ] An engineer may develop independently, in an isolated environment.
-- [ ] Engineering experiences a quick, responsive feedback loop.
+- [ ] Engineering experiences a quick, accurate, and responsive feedback loop.
 
 ## Testability
 - [ ] A development engineer reaches full confidence before any new code leaves their isolated environment.

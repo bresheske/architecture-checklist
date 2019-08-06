@@ -70,4 +70,15 @@ The benefits are extensive.
   - If a feature requires significant refactoring, significant refactoring of the tests would be required as well.
 
  ### **Requirement 1: A development engineer reaches full confidence before any new code leaves their isolated environment.**
- 
+One thing I have learned over the course of my career, is that developers _hate_ repetition and not-automative efforts. Meaning, if an architect said each developer was in charge of quality testing before it left their hands, you can gaurentee the developer will have automated the tested effort. Furthermore these tests would be added to a suite of self-contained, consistent test cases. 
+
+Using a suite of test cases also transforms a development workflow. Traditionally, developers would make a change, run everything locally, and click around to make sure it works. Now, with a large set of unit and integration tests, developers follow these steps:
+1. Developer reads and understands story/feature.
+1. Developer writes some unit and integration tests.
+1. Developer watches the test fail. 
+1. Developer develops the feature, and slowly starts to watch their tests pass.
+1. Rinse and repeat until the whole feature is complete.
+
+This is also considered _test driven development_, which is not required for the developer gaining full confidence in the quality of code before handing it off, but it sure helps build up a great, reuseable suite a test that the next individual is going to use as well.
+
+**Suggestion:** From ground zero, unit and integration tests must be prioritized and are a must-have for any feature before it goes into production.

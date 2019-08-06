@@ -42,7 +42,7 @@ I was not particularly happy about this. Lots of others shared the same emotiona
 
 Developers want to produce efficiently and with quality. Local development gives them both, and an isolated environment gives them the time to take pride in their work before showing alpha bug-ridden code to the rest of their team. 
 
-**Suggestion:** Simply pick a platform that doesn't differ too greatly from isolated development. In my opinion, FAAS architectures are lacking in this category at the moment. The future might change that.
+**Suggestion:** Simply pick a platform that doesn't differ too greatly from isolated development. In my opinion, FAAS (function-as-a-service) architectures are lacking in this category at the moment. The future might change that.
 
 **Suggestion:** Development experience is your product's number one feature. If isolated environment development (localhost development) is not supported, be prepared to pay for that in every single feature that is developed from here on out.
 
@@ -54,3 +54,19 @@ This experience exhibited a _massive_ feedback loop. By the time developers rece
 Again, developers _want_ to produce quality, and _want_ to take pride in their work. 
 
 **Suggestion:** Ensure _automated_ quality is prioritized alongside of any feature. I recommend an exhaustive suite of unit and integration tests. However, you must also ensure to keep these tests executing quickly, otherwise they become a hindrance.
+
+## Testability
+No feature is complete with quick, reproduceable evidence that it's working as expected. If unit, integration, and full E2E testing is prioritized from day one, this effort will pay off in dividends. Inversely, if no quality automation is prioritized be prepared to pay for that exponentially. 
+
+The benefits are extensive.
+ - Unit and Integration test experiences provide developers with a way to execute their business logic quickly, and in an isolated environment. 
+ - Test suites built from day one remove the need for week-long full regression cycles before a release is certified.
+ - Test suites will ensure bugs are caught early, long before the code is deployed to production.
+ - Less bugs reported from customers means happier customers and more revenue for the organization.
+ - High-coverage test suites allows for a full CI/CD experience and makes releases much quicker.
+
+ The costs are low
+  - Each new feature developed will have to maintain the test suite.
+  - If a feature requires significant refactoring, significant refactoring of the tests would be required as well.
+
+ ### **Requirement 1: A development engineer reaches full confidence before any new code leaves their isolated environment.**

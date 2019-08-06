@@ -69,7 +69,7 @@ The benefits are extensive.
   - Each new feature developed will have to maintain the test suite.
   - If a feature requires significant refactoring, significant refactoring of the tests would be required as well.
 
- ### **Requirement 1: A development engineer reaches full confidence before any new code leaves their isolated environment.**
+### **Requirement 1: A development engineer reaches full confidence before any new code leaves their isolated environment.**
 One thing I have learned over the course of my career, is that developers _hate_ repetition and not-automative efforts. Meaning, if an architect said each developer was in charge of quality testing before it left their hands, you can gaurentee the developer will have automated the tested effort. Furthermore these tests would be added to a suite of self-contained, consistent test cases. 
 
 Using a suite of test cases also transforms a development workflow. Traditionally, developers would make a change, run everything locally, and click around to make sure it works. Now, with a large set of unit and integration tests, developers follow these steps:
@@ -82,3 +82,47 @@ Using a suite of test cases also transforms a development workflow. Traditionall
 This is also considered _test driven development_, which is not required for the developer gaining full confidence in the quality of code before handing it off, but it sure helps build up a great, reuseable suite a test that the next individual is going to use as well.
 
 **Suggestion:** From ground zero, unit and integration tests must be prioritized and are a must-have for any feature before it goes into production.
+
+**Suggestion:** Keep in mind, developers will require this development experience to execute quickly. Remember developer experience #3, the feedback loop must be efficient. If a suite of tests grows over time and starts to consume time and processing power, look for performance optimization opportunities or simply re-define which tests are acceptable to run at which times. For example, we'll never expect to run a full suite of E2E tests while a developer is writing code, as it will just take way to long for the developer to gain useful feedback.
+
+### **Requirement 2: A certification engineer reaches full confidence before any new code leaves their isolated environment.**
+This is pretty much idential to the previous requirement, but I decided to separate them out. A certification engineer (QA / QA Automation) typically tests the project in a different way, and tends to hit different chunks of code in different areas. 
+
+At this point, we know the developer has already ensured the integration tests pass before handing it off. The certification engineer needs to ensure:
+ - The tests created by the developer make sense, and hit all required cases.
+ - The feature doesn't unexpectedly break any pre-existing full E2E test cases.
+
+ **Suggestion:** From ground zero, an E2E suite of tests must be prioritized for a re-runnable proof-of-quality before any feature or release heads out to production. However, E2E tests are notoriously slow. These cases need to be added into the development pipeline but they shouldn't slow down developers at all. 
+
+ **Suggestion:** I don't believe the E2E suite should focus on 100% coverage. Coverage should be hit in unit and integration tests, but E2E is to test to make sure two or more separate projects can communicate effectively. This also ensures the E2E suite runs quicker.
+
+### **Requirement 3: Any enginner may gain full confidence in product quality by pushing one button.**
+Wrapping up the testing section, this rule requires all work can be re-certified by anyone, and executed anywhere. This ensures that all of the testing for the feature is automated. 
+
+If all of these pieces are put in place from the project initiation date, there's a very positive development CI/CD pipeline that can be created.
+
+1. Developers code for the feature, and run and create unit/integration tests along the way.
+1. QA professionals develop and maintain the E2E suite along the way.
+1. Developers push up pull-requests, other developers and QA professionals review it. The same thing happens to the E2E code.
+1. The code is accepted and deployed to a Dev/Test environment.
+1. The integration tests are executed against the deployed environment.
+1. The E2E test is executed in reasonable intervals, depending on how quickly they execute.
+1. The feature is ready for shipping!
+
+A project's pipeline shouldn't be any more complicated than this. If it is, you're probably catching bugs way too late which causes constant developer/QA interruptions and adds tons of stress onto teams. They will find they wants to be developing features, but are spening 90% of their time debugging issues found in production while completing their sprint work.
+
+## Deployability
+The ability to configure and deploy to an environment is a feature to maintained. This needs to be prioritized early, if not first, as these processes tend to not change through a projects lifetime, unless other sub-projects are created or other architectural schemes are introduced. Overall the maintenance cost tends to be pretty low.
+
+### **Requirement 1: An enginner may configure a fresh executing environment by pushing one button.**
+This rule ensures it doesn't require countless effort to spin up new deployed environments. One might argue this script won't pay off in dividends, as we really only need to execute it once per environment. But I would attest this is important for these reasons:
+ - As your organization grows, it's easy to spin up new development/test environments.
+ - It ensures the development professionals fully understand the dependencies of the project.
+ - It ensures load-balancing and replication requirements can be easiely met.
+
+**Suggestion:** Depending on your target environment, this step might not be necessary. But for example, if you're targetting a linux server and are deploying through SSH, you'll need a configure script to install your dependencies (like docker, nodeJS, or dotNetCore). These scripts should also check the installed versions of these dependencies and output them, as different versions can produce different results.
+
+### **Requirement 2: An enginner may deploy the system to an environment by pushing one button.**
+This might be one of the most important pieces for a new project. If you can deploy your system by running a single shell command, your development pipeline will be nearly in full CI/CD mode, and your engineers will be much happier working on features rather than tedious copying and pasting of files out in a VM. 
+
+**Suggestion:** From day one, any time the project is deployed to any environment that process is done through automated means. Those automated scripts are must-have features that needs to be maintained. The good news is, these scripts will be the first thing a developer realizes breaks when it does, and will be caught early.
